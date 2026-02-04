@@ -7,14 +7,14 @@ import {
 } from "@/lib/constants";
 
 const Home = () => {
-    const scriptURL = `https://s3.tradingview.com/external-embedding/embed-widget-`
+    const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`
     return (
         <div className="flex min-h-screen home-wrapper">
             <section className="grid w-full gap-8 home-section">
                 <div className="md:col-span-1 xl:col-span-1">
                     <TradingViewWidget
                         title="Market Overview"
-                        scriptURL={`${scriptURL}market-overview.js`}
+                        scriptUrl={`${scriptUrl}market-overview.js`}
                         config={MARKET_OVERVIEW_WIDGET_CONFIG}
                         className="custom-chart"
                         height={600}
@@ -23,7 +23,7 @@ const Home = () => {
                 <div className="md:col-span-1 xl:col-span-2">
                     <TradingViewWidget
                         title="Stock Heatmap"
-                        scriptURL={`${scriptURL}stock-heatmap.js`}
+                        scriptUrl={`${scriptUrl}stock-heatmap.js`}
                         config={HEATMAP_WIDGET_CONFIG}
                         height={600}
                     />
@@ -32,7 +32,7 @@ const Home = () => {
             <section className="grid w-full gap-8 home-section">
                 <div className="h-full md:col-span-1 xl:col-span-1">
                     <TradingViewWidget
-                        scriptURL={`${scriptURL}timeline.js`}
+                        scriptUrl={`${scriptUrl}timeline.js`}
                         config={TOP_STORIES_WIDGET_CONFIG}
                         className="custom-chart"
                         height={600}
@@ -40,7 +40,7 @@ const Home = () => {
                 </div>
                 <div className="h-full md:col-span-1 xl:col-span-2">
                     <TradingViewWidget
-                        scriptURL={`${scriptURL}market-quotes.js`}
+                        scriptUrl={`${scriptUrl}market-quotes.js`}
                         config={MARKET_DATA_WIDGET_CONFIG}
                         height={600}
                     />
