@@ -10,14 +10,17 @@
     "test:db": "ts-node -O \"{\\\"module\\\":\\\"commonjs\\\",\\\"esModuleInterop\\\":true}\" scripts/test-db.ts"
   },
   "dependencies": {
+    "better-auth": "^1.4.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "inngest": "^3.50.0",
     "lucide-react": "^0.563.0",
     "mongodb": "^7.1.0",
     "mongoose": "^9.1.5",
     "next": "16.1.6",
     "next-themes": "^0.4.6",
+    "nodemailer": "^8.0.0",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -29,6 +32,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-select-country-list": "^2.2.3",
