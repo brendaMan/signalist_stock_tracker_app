@@ -8,8 +8,12 @@ import {headers} from "next/headers";
 export const signUpWithEmail = async ({email, password, fullName, investmentGoals, country, riskTolerance, preferredIndustry}: SignUpFormData) => {
     try {
         const response = await auth.api.signUpEmail({
-            body: {email, password, name: fullName}
+            body: {email, password, name: fullName},
+            headers: await headers(),
         })
+        if (!response) {
+            return { success: false, error: 'Sign up failed' };
+        }
         if(response) {
             await inngest.send({
                 name: 'app/user.created',
@@ -27,7 +31,13 @@ export const signUpWithEmail = async ({email, password, fullName, investmentGoal
 
 export const signInWithEmail = async ({ email, password }: SignInFormData) => {
     try {
-        const response = await auth.api.signInEmail({ body: { email, password } })
+        const response = await auth.api.signInEmail({
+            body: { email, password },
+            headers: await headers(),
+        })
+        if (!response) {
+            return { success: false, error: 'Sign in failed' }
+        }
 
         return { success: true, data: response }
     } catch (e) {

@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import {useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button";
 import InputField from "@/components/forms/InputField";
@@ -11,47 +12,43 @@ import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 
 const SignUp = () => {
-    const router = useRouter();
+    const router = useRouter()
     const {
         register,
         handleSubmit,
         control,
         formState: { errors, isSubmitting },
     } = useForm<SignUpFormData>({
-    defaultValues: {
-        fullName: '',
-            email
-    :
-        '',
-            password
-    :
-        '',
-            country
-    :
-        'DE',
-            investmentGoals
-    :
-        'Growth',
-        riskTolerance
-    :
-        'Medium',
-            preferredIndustry
-    :
-        'Technology'
-    }, mode: 'onBlur'},)
+        defaultValues: {
+            fullName: '',
+            email: '',
+            password: '',
+            country: 'DE',
+            investmentGoals: 'Growth',
+            riskTolerance: 'Medium',
+            preferredIndustry: 'Technology'
+        },
+        mode: 'onBlur'
+    }, );
 
-    const onSubmit  = async (data: SignUpFormData) => {
+    const onSubmit = async (data: SignUpFormData) => {
         try {
             const result = await signUpWithEmail(data);
-            if (result.success) router.push("/");
-        }
-        catch (error) {
-            console.log(error)
+            if (result.success) {
+                router.push('/');
+                return;
+            }
             toast.error('Sign up failed', {
-                description: error instanceof Error ? error.message : 'Failed to create account',
+                description: result.error || 'Failed to create an account.'
+            })
+        } catch (e) {
+            console.error(e);
+            toast.error('Sign up failed', {
+                description: e instanceof Error ? e.message : 'Failed to create an account.'
             })
         }
     }
+
 
     return (
         <>
@@ -70,7 +67,7 @@ const SignUp = () => {
                 placeholder="Enter your email"
                 register={register}
                 error={errors.email}
-                validation={{required: 'Email is required', message: 'Email is required'}}
+                validation={{ required: 'Email name is required', pattern: /^\w+@\w+\.\w+$/, message: 'Email address is required' }}
             />       <InputField
                 name="password"
                 label="Password"
@@ -78,7 +75,11 @@ const SignUp = () => {
                 type="password"
                 register={register}
                 error={errors.password}
-                validation={{required: 'Password is required', minLength: 8}}
+                validation={{
+                    required: 'Password is required',
+                    minLength: { value: 8, message: 'Password must be at least 8 characters' },
+                    maxLength: { value: 12, message: 'Password must be at most 12 characters' },
+                }}
             />
                 <CountrySelectField
                     name="country"
